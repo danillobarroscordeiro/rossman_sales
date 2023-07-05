@@ -7,7 +7,6 @@ backcall==0.2.0
 beautifulsoup4==4.11.1
 bleach==5.0.0
 Boruta==0.3
-certifi @ file:///opt/conda/conda-bld/certifi_1655968806487/work/certifi
 cffi==1.15.0
 charset-normalizer==2.1.1
 click==8.1.3
