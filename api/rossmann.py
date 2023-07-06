@@ -22,7 +22,7 @@ import requests
 
 class Rossmann(object):
     def __init__(self):
-        self_home_path = '/home/dbcordeiro/repos/rossmann_sales/'
+        self_home_path = '/home/dbcordeiro@sefaz.al.gov.br/Documents/repos/rossman_sales/'
         self.competition_distance_scaler        = pickle.load(open(self_home_path + 'parameter/competition_distance_scaler.pkl', 'rb') )
         self.competition_time_month_scaler = pickle.load(open(self_home_path + 'parameter/competition_time_month_scaler.pkl', 'rb') )
         self.promo2_time_week_scaler           = pickle.load(open(self_home_path + 'parameter/promo2_time_week_scaler.pkl', 'rb') )
@@ -153,7 +153,7 @@ class Rossmann(object):
         df5['competition_distance'] = self.competition_distance_scaler.transform(df5[['competition_distance']].values)
         df5['competition_time_month'] = self.competition_time_month_scaler.transform(df5[['competition_time_month']].values)
         df5['promo2_time_week'] = self.promo2_time_week_scaler.transform(df5[['promo2_time_week']].values)
-        df5['year'] = mms.transform(df5[['year']].values)
+        df5['year'] = self.year_scaler.transform(df5[['year']].values)
 
 
         ## Transformation
@@ -217,4 +217,4 @@ class Rossmann(object):
         #join prediction into original data
         original_data['prediction'] = np.expm1(prediction_values)
         
-        return original_data.to_json(orient='records', data_format='iso')
+        return original_data.to_json(orient='records')

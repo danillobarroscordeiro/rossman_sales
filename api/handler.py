@@ -4,7 +4,7 @@ from rossmann import Rossmann
 from flask import Flask, request, Response
 
 #loading model
-model = pickle.load(open( '/home/dbcordeiro/repos/rossmann_sales/model/model_rossmann.pkl', 'rb') )
+model = pickle.load(open( '/home/dbcordeiro@sefaz.al.gov.br/Documents/repos/rossman_sales/model/model_rossmann.pkl', 'rb') )
 
 
 #initialize API
