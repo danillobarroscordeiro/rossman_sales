@@ -5,9 +5,11 @@ from flask import Flask, request, Response
 #loading test dataset
 
 TOKEN = '6367271902:AAEYimkELSwkGrIUg-1D9SgxLlhNypLWjxQ'
-'https://api.telegram.org/bot6367271902:AAEYimkELSwkGrIUg-1D9SgxLlhNypLWjxQ/getMe'
+# 'https://api.telegram.org/bot6367271902:AAEYimkELSwkGrIUg-1D9SgxLlhNypLWjxQ/getMe'
 
-'https://api.telegram.org/bot6367271902:AAEYimkELSwkGrIUg-1D9SgxLlhNypLWjxQ/getUpdates'
+# 'https://api.telegram.org/bot6367271902:AAEYimkELSwkGrIUg-1D9SgxLlhNypLWjxQ/getUpdates'
+
+# 'https://api.telegram.org/bot6367271902:AAEYimkELSwkGrIUg-1D9SgxLlhNypLWjxQ/sendMessage?chat_id=1325084193&text=Hi Meigarom'
 
 def send_message(chat_id, text):
     url = 'https://api.telegram.org/bot/'.format(TOKEN)
@@ -17,7 +19,6 @@ def send_message(chat_id, text):
     print('Status Code {}').format(url_request.status_code)
 
     return None
-'https://api.telegram.org/bot6367271902:AAEYimkELSwkGrIUg-1D9SgxLlhNypLWjxQ/sendMessage?chat_id=1325084193&text=Hi Meigarom'
 
 def load_dataset(store_id):
 
@@ -63,19 +64,7 @@ def predict(data):
 
     return df_result
 
-# df_result_final = (
-#     df_result[['store', 'prediction']].groupby('store')
-#     .sum()
-#     .reset_index()         
-# )
 
-# for i in range(len(df_result_final)):
-#     print(
-#         'Store Number {} will sell R${:,.2f} in the next 6 weeks'.format(
-#         df_result_final.loc[i, 'store'],
-#         df_result_final.loc[i, 'prediction']
-#         )
-#     )
 
 def parse_message(message):
     chat_id = message['message']['chat']['id']
@@ -91,7 +80,7 @@ def parse_message(message):
 app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    if request.method = 'POST':
+    if request.method == 'POST':
         message = request.get_json()
 
         chat_id, store_id = parse_message(message)
@@ -99,7 +88,19 @@ def index():
         if store_id != 'error':
             data = load_dataset(store_id)
             if data != 'error':
-                d1 = predict(data)
+                df_result = predict(data)
+                df_result_final = (
+                    df_result[['store', 'prediction']].groupby('store')
+                    .sum()
+                    .reset_index()         
+                )
+                msg = 'Store Number {} will sell R${:,.2f} in the next 6 weeks'.format(
+                df_result_final.loc['store'].values[0],
+                df_result_final.loc['prediction'].values[0])
+
+                send_message(chat_id, msg)
+                return Response('Ok', status=200)
+                
             else:
                 send_message(chat_id, 'Store not avaliable')
                 return Response('Ok', status=200)
@@ -109,5 +110,5 @@ def index():
         return Response('Ok', status=200)
 
 
-if __name__ = '__main__':
+if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
