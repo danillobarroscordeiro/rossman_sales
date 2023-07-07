@@ -2,15 +2,25 @@ import pickle
 import pandas as pd
 from rossmann import Rossmann
 from flask import Flask, request, Response
+import joblib
+import s3fs
+import os
+import waitress
+
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+s3 = s3fs.S3FileSystem(
+    anon=False, key=AWS_ACCESS_KEY_ID, secret=AWS_SECRET_ACCESS_KEY)
 
 #loading model
-model = pickle.load(open( '/home/dbcordeiro@sefaz.al.gov.br/Documents/repos/rossman_sales/model/model_rossmann.pkl', 'rb') )
-
+model = joblib.load(
+    open('s3://rossmann-sales/model/model_rossmann.pkl', 'rb')
+    )
 
 #initialize API
 app = Flask(__name__)
 
-@app.route('/rossmann/predict', methods=['POST'] )
+@app.route('/predict', methods=['POST'] )
 def rossmann_predict():
     test_json = request.get_json()
     
@@ -39,4 +49,5 @@ def rossmann_predict():
         return Response( '{}', status=200, mimetype='application/json')
 
 if __name__ == '__main__':
-    app.run('0.0.0.0')
+    # app.run('0.0.0.0')
+    waitress.serve(app, host='0.0.0.0', port=8080)

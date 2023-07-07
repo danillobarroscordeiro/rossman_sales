@@ -2,6 +2,7 @@ import pandas as pd
 import json
 import requests
 from flask import Flask, request, Response
+import waitress
 #loading test dataset
 
 TOKEN = '6367271902:AAEYimkELSwkGrIUg-1D9SgxLlhNypLWjxQ'
@@ -23,10 +24,10 @@ def send_message(chat_id, text):
 def load_dataset(store_id):
 
     df10 = pd.read_csv(
-        '/home/dbcordeiro@sefaz.al.gov.br/Documents/repos/rossman_sales/data/test.csv'
+        '/home/ubuntu/rossman_sales/data/test.csv'
         )
     df_store_raw = pd.read_csv(
-        '/home/dbcordeiro@sefaz.al.gov.br/Documents/repos/rossman_sales/data/store.csv'
+        '/home/ubuntu/rossman_sales/store.csv'
         )
 
     #merge test dataset + store
@@ -51,7 +52,7 @@ def load_dataset(store_id):
 
 def predict(data):
     #API Call
-    url = 'http://0.0.0.0:5000/rossmann/predict'
+    url = 'http://0.0.0.0:8080/predict'
     header = {'Content-type':'application/json'}
     data = data
 
@@ -78,7 +79,7 @@ def parse_message(message):
         store_id = 'error'
 
 app = Flask(__name__)
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/bot', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
         message = request.get_json()
@@ -111,4 +112,5 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    # app.run(host='0.0.0.0', port=5000)
+    waitress.serve(app, host='0.0.0.0', port=8000)
