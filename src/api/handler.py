@@ -14,7 +14,7 @@ s3 = s3fs.S3FileSystem(
 
 #loading model
 model = joblib.load(
-    open('s3://rossmann-sales/model/model_rossmann.pkl', 'rb')
+    s3.open('s3://rossmann-sales/model/model_rossmann.pkl', 'rb')
     )
 
 #initialize API

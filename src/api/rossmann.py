@@ -24,19 +24,19 @@ class Rossmann(object):
     def __init__(self):
         self_home_path = 's3://rossmann-sales/'
         self.competition_distance_scaler = joblib.load(
-            open(self_home_path + 'parameter/competition_distance_scaler.pkl', 'rb')
+            s3.open(self_home_path + 'parameter/competition_distance_scaler.pkl', 'rb')
         )
         self.competition_time_month_scaler = joblib.load(
-            open(self_home_path + 'parameter/competition_time_month_scaler.pkl', 'rb')
+            s3.open(self_home_path + 'parameter/competition_time_month_scaler.pkl', 'rb')
             )
         self.promo2_time_week_scaler = joblib.load(
-            open(self_home_path + 'parameter/promo2_time_week_scaler.pkl', 'rb')
+            s3.open(self_home_path + 'parameter/promo2_time_week_scaler.pkl', 'rb')
             )
         self.year_scaler = joblib.load(
-            open(self_home_path + 'parameter/year_scaler.pkl', 'rb')
+            s3.open(self_home_path + 'parameter/year_scaler.pkl', 'rb')
             )
         self.store_type_scaler = joblib.load(
-            open(self_home_path + 'parameter/store_type_scaler.pkl', 'rb')
+            s3.open(self_home_path + 'parameter/store_type_scaler.pkl', 'rb')
             )
       
         
