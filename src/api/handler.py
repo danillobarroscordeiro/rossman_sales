@@ -42,9 +42,7 @@ def rossmann_predict():
         #prediction
         df_response = pipeline.get_prediction(model,test_raw,df3)
 
-        response_json = df_response.to_json(orient='records')
-        
-        return Response(response_json, status=200, mimetype='application/json')
+        return df_response
     
     
     else:

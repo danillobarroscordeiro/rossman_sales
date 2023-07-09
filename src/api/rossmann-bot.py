@@ -5,14 +5,15 @@ from flask import Flask, request, Response
 import waitress
 #loading test dataset
 
-TOKEN = '6367271902:AAEYimkELSwkGrIUg-1D9SgxLlhNypLWjxQ'
-# 'https://api.telegram.org/bot6367271902:AAEYimkELSwkGrIUg-1D9SgxLlhNypLWjxQ/getMe'
+# TOKEN = '6367271902:AAEYimkELSwkGrIUg-1D9SgxLlhNypLWjxQ'
+TOKEN = '6120741260:AAHN8_1y1eWpjbjmsZf9ZH4UsYkoSYBLn6E'
+# 'https://api.telegram.org/botTOKEN/getMe'
 
-# 'https://api.telegram.org/bot6367271902:AAEYimkELSwkGrIUg-1D9SgxLlhNypLWjxQ/getUpdates'
+# 'https://api.telegram.org/botTOKEN/getUpdates'
 
-# 'https://api.telegram.org/bot6367271902:AAEYimkELSwkGrIUg-1D9SgxLlhNypLWjxQ/sendMessage?chat_id=1325084193&text=Hi Meigarom'
+# 'https://api.telegram.org/botTOKEN/sendMessage?chat_id=1325084193&text=Hi Meigarom'
 
-# 'https://api.telegram.org/bot6367271902:AAEYimkELSwkGrIUg-1D9SgxLlhNypLWjxQ/setWebhook?url=ec2-54-159-137-138.compute-1.amazonaws.com
+# 'https://api.telegram.org/botTOKEN/setWebhook?url=ec2-54-159-137-138.compute-1.amazonaws.com
 
 
 
