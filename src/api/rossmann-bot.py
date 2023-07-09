@@ -4,6 +4,11 @@ import requests
 from flask import Flask, request, Response
 import waitress
 
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
+
 TOKEN = '6146197280:AAGXqdrqL1dlK4035faLC9fMggQJf9-0fJ4'
 # 'https://api.telegram.org/botTOKEN/getMe'
 
@@ -21,6 +26,9 @@ def send_message(chat_id, text):
 
     url_request = requests.post(url, json={'text': text})
     print('Status Code {}').format(url_request.status_code)
+
+    logger.debug('Status Code: %d', url_request.status_code)
+
 
     return None
 
@@ -58,6 +66,9 @@ def predict(data):
     url = 'http://ec2-54-159-137-138.compute-1.amazonaws.com:8080/predict'
     header = {'Content-type':'application/json'}
     df = data
+
+    logger.debug('Status Code: %d', request_api.status_code)
+
 
     request_api = requests.post(url, data=df, headers=header)
     print('Status Code {}'.format(request_api.status_code))
@@ -110,6 +121,9 @@ def index():
             else:
                 send_message(chat_id, 'Store not avaliable')
                 return Response('Ok', status=200)
+        else:
+                send_message(chat_id, 'Store not avaliable')
+                return Response('Ok', status=200)
             
     else:
         return '<h1> Rossman Telegram BOT <h1>'
@@ -117,4 +131,6 @@ def index():
 
 if __name__ == '__main__':
     # app.run(host='0.0.0.0', port=5000)
+    logger.info('Starting the Telegram bot server...')
+
     waitress.serve(app, host='0.0.0.0', port=8443)
