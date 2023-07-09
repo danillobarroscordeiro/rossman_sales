@@ -3,10 +3,8 @@ import json
 import requests
 from flask import Flask, request, Response
 import waitress
-#loading test dataset
 
-# TOKEN = '6367271902:AAEYimkELSwkGrIUg-1D9SgxLlhNypLWjxQ'
-TOKEN = '6120741260:AAHN8_1y1eWpjbjmsZf9ZH4UsYkoSYBLn6E'
+TOKEN = '6146197280:AAGXqdrqL1dlK4035faLC9fMggQJf9-0fJ4'
 # 'https://api.telegram.org/botTOKEN/getMe'
 
 # 'https://api.telegram.org/botTOKEN/getUpdates'
@@ -119,4 +117,4 @@ def index():
 
 if __name__ == '__main__':
     # app.run(host='0.0.0.0', port=5000)
-    waitress.serve(app, host='0.0.0.0', port=8000)
+    waitress.serve(app, host='0.0.0.0', port=8443)
