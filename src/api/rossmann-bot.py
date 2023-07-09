@@ -12,8 +12,11 @@ TOKEN = '6367271902:AAEYimkELSwkGrIUg-1D9SgxLlhNypLWjxQ'
 
 # 'https://api.telegram.org/bot6367271902:AAEYimkELSwkGrIUg-1D9SgxLlhNypLWjxQ/sendMessage?chat_id=1325084193&text=Hi Meigarom'
 
+# 'https://api.telegram.org/bot6367271902:AAEYimkELSwkGrIUg-1D9SgxLlhNypLWjxQ/setWebhook?url=ec2-54-159-137-138.compute-1.amazonaws.com
+
+
 def send_message(chat_id, text):
-    url = 'https://api.telegram.org/bot/'.format(TOKEN)
+    url = 'https://api.telegram.org/bot{}/'.format(TOKEN)
     url = url + 'sendMessage?chat_id={}'.format(chat_id)
 
     url_request = requests.post(url, json={'text': text})
@@ -36,7 +39,7 @@ def load_dataset(store_id):
     #choose store from prediction
     df_test = df_test[df_test['Store'] == store_id]
 
-    if not df_test.empty():
+    if not df_test.empty:
         #remove closed days
         df_test = df_test[df_test['Open'] != 0]
         df_test = df_test[~df_test['Open'].isnull()]
@@ -77,6 +80,8 @@ def parse_message(message):
         store_id = int(store_id)
     except ValueError:
         store_id = 'error'
+    
+    return chat_id, store_id
 
 app = Flask(__name__)
 @app.route('/bot', methods=['GET', 'POST'])
@@ -107,7 +112,7 @@ def index():
                 return Response('Ok', status=200)
 
     else:
-        send_message(chat_id, 'There is no store ID avaliable')
+        send_message(chat_id, 'Store not avaliable')
         return Response('Ok', status=200)
 
 
