@@ -15,6 +15,7 @@ TOKEN = '6367271902:AAEYimkELSwkGrIUg-1D9SgxLlhNypLWjxQ'
 # 'https://api.telegram.org/bot6367271902:AAEYimkELSwkGrIUg-1D9SgxLlhNypLWjxQ/setWebhook?url=ec2-54-159-137-138.compute-1.amazonaws.com
 
 
+
 def send_message(chat_id, text):
     url = 'https://api.telegram.org/bot{}/'.format(TOKEN)
     url = url + 'sendMessage?chat_id={}'.format(chat_id)
@@ -57,9 +58,9 @@ def predict(data):
     #API Call
     url = 'http://0.0.0.0:8080/predict'
     header = {'Content-type':'application/json'}
-    data = data
+    df = data
 
-    request_api = requests.post(url, data=data, headers=header)
+    request_api = requests.post(url, data=df, headers=header)
     print('Status Code {}'.format(request_api.status_code))
 
     df_result = pd.DataFrame(
@@ -110,10 +111,9 @@ def index():
             else:
                 send_message(chat_id, 'Store not avaliable')
                 return Response('Ok', status=200)
-
+            
     else:
-        send_message(chat_id, 'Store not avaliable')
-        return Response('Ok', status=200)
+        return '<h1> Rossman Telegram BOT <h1>'
 
 
 if __name__ == '__main__':
