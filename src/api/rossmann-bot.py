@@ -63,7 +63,7 @@ def load_dataset(store_id):
 
 def predict(data):
     #API Call
-    url = 'http://ec2-54-159-137-138.compute-1.amazonaws.com:5000/predict'
+    url = 'http://ec2-35-170-246-238.compute-1.amazonaws.com:5000/predict'
     header = {'Content-type':'application/json'}
     df = data
 
