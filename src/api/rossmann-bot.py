@@ -98,7 +98,7 @@ def parse_message(message):
     return chat_id, store_id
 
 app = Flask(__name__)
-@app.route('/bot', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
         message = request.get_json()
@@ -133,4 +133,4 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5500)
