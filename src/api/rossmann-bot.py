@@ -63,7 +63,7 @@ def load_dataset(store_id):
 
 def predict(data):
     #API Call
-    url = 'http://ec2-54-159-137-138.compute-1.amazonaws.com:8080/predict'
+    url = 'http://ec2-54-159-137-138.compute-1.amazonaws.com:5000/predict'
     header = {'Content-type':'application/json'}
     df = data
 
@@ -130,7 +130,4 @@ def index():
 
 
 if __name__ == '__main__':
-    # app.run(host='0.0.0.0', port=5000)
-    logger.info('Starting the Telegram bot server...')
-
-    waitress.serve(app, host='0.0.0.0', port=8443)
+    app.run(host='0.0.0.0', port=5000)
