@@ -5,8 +5,11 @@ from flask import Flask, request, Response
 import waitress
 
 import logging
+from logging.handlers import RotatingFileHandler
 
-logging.basicConfig(level=logging.DEBUG)
+# Configure logging
+log_file = 'rossmann-bot.log'
+logging.basicConfig(level=logging.DEBUG, handlers=[RotatingFileHandler(log_file, maxBytes=1000000, backupCount=3)])
 logger = logging.getLogger(__name__)
 
 TOKEN = '6146197280:AAGXqdrqL1dlK4035faLC9fMggQJf9-0fJ4'
