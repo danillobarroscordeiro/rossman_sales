@@ -28,7 +28,7 @@ def send_message(chat_id, text):
     url = url + 'sendMessage?chat_id={}'.format(chat_id)
 
     url_request = requests.post(url, json={'text': text})
-    print('Status Code {}').format(url_request.status_code)
+    print('Status Code {}'.format(url_request.status_code))
 
     logger.debug('Status Code: %d', url_request.status_code)
 
@@ -69,8 +69,6 @@ def predict(data):
     url = 'http://ec2-35-170-246-238.compute-1.amazonaws.com:5000/predict'
     header = {'Content-type':'application/json'}
     df = data
-
-    logger.debug('Status Code: %d', request_api.status_code)
 
 
     request_api = requests.post(url, data=df, headers=header)

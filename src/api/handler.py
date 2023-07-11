@@ -7,6 +7,15 @@ import s3fs
 import os
 import waitress
 
+import logging
+from logging.handlers import RotatingFileHandler
+
+# Configure logging
+log_file = 'handler.log'
+logging.basicConfig(level=logging.DEBUG, handlers=[RotatingFileHandler(log_file, maxBytes=1000000, backupCount=3)])
+logger = logging.getLogger(__name__)
+
+
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
 s3 = s3fs.S3FileSystem(
