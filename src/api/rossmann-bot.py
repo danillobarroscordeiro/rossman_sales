@@ -68,10 +68,10 @@ def predict(data):
     #API Call
     url = 'http://ec2-35-170-246-238.compute-1.amazonaws.com:5000/predict'
     header = {'Content-type':'application/json'}
-    df = data
+    data = data
 
 
-    request_api = requests.post(url, data=df, headers=header)
+    request_api = requests.post(url, data=data, headers=header)
     print('Status Code {}'.format(request_api.status_code))
 
     df_result = pd.DataFrame(
@@ -113,8 +113,8 @@ def index():
                     .reset_index()         
                 )
                 msg = 'Store Number {} will sell R${:,.2f} in the next 6 weeks'.format(
-                df_result_final.loc['store'].values[0],
-                df_result_final.loc['prediction'].values[0])
+                df_result_final['store'].values[0],
+                df_result_final['prediction'].values[0])
 
                 send_message(chat_id, msg)
                 return Response('Ok', status=200)
