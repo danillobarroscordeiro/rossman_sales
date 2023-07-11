@@ -160,7 +160,7 @@ class Rossmann(object):
 
         #promo2 since
 
-        df2['promo2_since'] = df2['promo2_since_year'].astype(str) 
+        df2['promo2_since'] = df2['promo2_since_year'].astype(str) \
         + '-' + df2['promo2_since_week'].astype(str)
         df2['promo2_since'] = df2['promo2_since'].apply(
             lambda x: dt.strptime(x + '-1','%Y-%W-%w') -  datetime.timedelta(days=7)
