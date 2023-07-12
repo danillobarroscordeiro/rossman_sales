@@ -1,8 +1,8 @@
 # **Rossman Sales Prediction**
-![](/img/rossmann.jpg)
+![](reports/figures/rossmann.jpg)
 
 ## 1. **Introduction**
-This is an end-to-end data science project which predict sales of the next six weeks of Rossmann stores. It was used machine learning XGBoost algorithm to predict these sales. Predictions of each store can be accessed by users through Telegram as shown below.
+This is an end-to-end data science project which predict sales of the next six weeks of Rossmann stores. It was used machine learning XGBoost algorithm to predict these sales. APIs and model was hosted in a EC2 server of AWS cloud. Predictions of each store can be accessed by users through Telegram as shown below.
 
 ## 2. **Business Problem**
 
@@ -22,6 +22,8 @@ Therefore, the main goal is to predict the 6 next weeks sales for each store.
 * Git and Github
 * Flask and Python API's
 * Sklearn
+* AWS Cloud
+* ngrok
 
 ## **Dataset**
 
@@ -44,7 +46,6 @@ Dataset contains 1,017,209 rows and 17 columns of 1,115 Rossmann stores from 01/
 * PromoInterval - describes the consecutive intervals Promo2 is started, naming the months the promotion is started anew. E.g. "Feb,May,Aug,Nov" means each round starts in February, May, August, November of any given year for that store
 
 
-
 ## **Planning Soluction**
 
 This project was developed following CRISP-DM (Cross-Industry Standard Process - Data Science) framework. This framework has these steps:
@@ -58,7 +59,7 @@ This project was developed following CRISP-DM (Cross-Industry Standard Process -
 * Model and Business performance evaluation / Results;
 * Model deployment.
 
-![](/img/0%20crisp-dm.png)
+![](reports/figures/0%20crisp-dm.png)
 
 Step 1. Data description and cleaning: Seeing dimensions of data, checking existence of NAs, number of rows and columns. Fillout NAs, altering columns names,  Descriptive statistics.
 
@@ -86,23 +87,23 @@ Step 10. Deploy mode to production: Model was deployed in a cloud environment so
 
 *FALSE*. Actually, stores with competitors nearby sell 12% more, on average.
 
-![](/img/competition_distance.png)
-![](/img/h1.png)
+![](reports/figures/competition_distance.png)
+![](reports/figures/h1.png)
 
 
 H2. Stores with longer competitors (more than 1 year) sell 10% more on average.
 
 **FALSE**. There is almost no difference between sales of stores that have competitors with less than a year and that ones which have it.
 
-![](/img/competition_time_month.png)
-![](/img/h2.png)
+![](reports/figures/competition_time_month.png)
+![](reports/figures/h2.png)
 
 H3. Stores with more consecutive sales would sell more on average
 
 False. Actually stores that just join promotion 1 sells more than those which join consecutive promotion.
 
-![](/img/consecutive_sales.png)
-![](/img/h3.png)
+![](reports/figures/consecutive_sales.png)
+![](reports/figures/h3.png)
 
 ## **Performance**
 
@@ -110,11 +111,11 @@ Performance of all models using Cross Validation
 
 Although model with smallest error in cross validation was Random Forest, it was choosen the XGBoost model due to lower variance. Also, in hiperparameter tunning XGBoost have a lower error.
 
-![](/img/performance_comparasion.jpg)
+![](reports/figures/performance_comparasion.jpg)
 
 Performance XGBoost with hiperparameters otimized - Final model
 
-![](/img/final_model.jpg)
+![](reports/figures/final_model.jpg)
 
 ## **Business Performance**
 
@@ -124,12 +125,17 @@ In regards to the Mean Absolute Percentage Error (MAPE), model has an error of 9
 
 Here is an example of 10 stores and their predictions, including best and worst scenarions and total of
 
-![](/img/stores_predictions.png)
+![](reports/figures/stores_predictions.png)
 
 Considering all stores, predictions of sales for next 6 weeks was the following:
 
-![](/img/business_prediction.jpg)
+![](reports/figures/business_prediction.jpg)
 
 We can see in plot above the difference between true values and predictions as well how close they are.
 
-![](/img/predictions_plot.png)
+![](reports/figures/predictions_plot.png)
+
+
+Predictions are avaliable through a Telegram bot. Stakeholders just need to tell which store they desire to see expected sales to get the value.
+
+![](reports/figures/bot.gif)
